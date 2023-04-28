@@ -26,7 +26,7 @@ class WorkShift < ApplicationRecord
   belongs_to :employee
   belongs_to :store
 
-  enum status: {
+  enum day_of_week: {
     sunday: 0,
     monday: 10,
     tuesday: 20,

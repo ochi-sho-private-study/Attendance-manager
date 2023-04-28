@@ -61,8 +61,8 @@ ActiveRecord::Schema[7.0].define(version: 0) do
 
   create_table "work_shift_masters", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", default: "その他", comment: "シフトの時間帯名 (ex. 夜勤)"
-    t.datetime "start_time", null: false, comment: "シフトの開始時刻"
-    t.datetime "end_time", null: false, comment: "シフトの終了時刻"
+    t.time "start_time", null: false, comment: "シフトの開始時刻"
+    t.time "end_time", null: false, comment: "シフトの終了時刻"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

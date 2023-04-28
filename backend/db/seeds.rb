@@ -47,3 +47,19 @@ stores = Company.all.flat_map.with_index do |company, index|
 end
 
 Store.insert_all!(stores) # rubocop:disable Rails/SkipsModelValidations
+
+POSITION_NAMES = %w[
+  店長
+  パート
+  アルバイト
+  オーナー
+].freeze
+
+POSITION_NAMES.each do |name|
+  Position.create!(company: Company.first, name: name)
+end
+
+WorkShiftMaster.create!(name: '夕勤', start_time: '17:00', end_time: '22:00')
+WorkShiftMaster.create!(name: '夜勤A', start_time: '22:00', end_time: '3:00')
+WorkShiftMaster.create!(name: '夜勤B', start_time: '3:00', end_time: '8:00')
+WorkShiftMaster.create!(name: '夜勤フルタイム', start_time: '22:00', end_time: '8:00')

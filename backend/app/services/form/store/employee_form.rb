@@ -18,10 +18,12 @@ module Form
 
       def create!(store)
         ActiveRecord::Base.transaction do
-          employee = Employee.create!(common_employee_attributes(store))
-          PositionAssignmentCollection.new(position_ids, employee.id).create!
-          WorkShiftCollection.new(work_shifts, store.id, employee.id).create!
+          @current_employee = Employee.create!(common_employee_attributes(store))
+          PositionAssignmentCollection.new(position_ids, current_employee.id).create!
+          WorkShiftCollection.new(work_shifts, store.id, current_employee.id).create!
         end
+
+        self
       end
 
       def update!(store)
@@ -41,6 +43,8 @@ module Form
 
           current_employee.update!(update_params)
         end
+
+        self
       end
 
       # NOTE: default_attributesには、position_idsとwork_shiftsは不要。

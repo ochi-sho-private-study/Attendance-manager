@@ -8,6 +8,8 @@ Rails.application.routes.draw do
           get :show
         end
       end
+
+      resources :employees, only: %i[create index]
     end
   end
 end
