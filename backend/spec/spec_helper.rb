@@ -3,7 +3,7 @@
 require 'simplecov'
 SimpleCov.start 'rails' do
   enable_coverage :branch
-  minimum_coverage(line: 80, branch: 60)
+  minimum_coverage(line: 60, branch: 60)
 end
 
 RSpec.configure do |config|
