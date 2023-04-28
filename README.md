@@ -1,9 +1,26 @@
-# コンビニの勤怠システムを作る
+# 勤怠管理くん
+
+## このアプリについて
+
+コンビニ店舗向けの勤怠管理アプリです。
+想定ユーザーは全従業員です。
 
 ## 環境構築
 
-https://github.com/nisshiy30/attendance/blob/main/docs/%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89.md
+### バックエンド
 
-## 実装要件
+```
+$ docker-compose build
+$ docker network create latimeria-network
+$ docker-compose run --rm att_backend rake db:create
+$ docker-compose run --rm att_backend rake db:create RAILS_ENV=test
+---------以下は未対応・未実装部分のため、実行できないが記述----------
+$ docker-compose run --rm att_backend rake ridgepole:apply
+$ docker-compose run --rm att_backend rake db:seed
+```
 
-https://github.com/nisshiy30/attendance/blob/main/docs/%E5%AE%9F%E8%A3%85%E8%A6%81%E4%BB%B6.md
+### フロントエンド
+
+```
+$ docker-compose build
+```
