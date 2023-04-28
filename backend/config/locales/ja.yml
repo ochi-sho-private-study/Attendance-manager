@@ -1,0 +1,24 @@
+ja:
+  activerecord:
+    errors:
+      messages:
+        record_invalid: "バリデーションエラーです。%{errors}"
+        blank: "%{attribute}を入力してください。"
+        taken: "%{attribute}は既に存在します。"
+        too_long: "%{attribute}は%{count}文字以内で入力してください。"
+        inclusion: "%{attribute}を選択してください。"
+        exclusion: "%{attribute}を選択してください。"
+        too_short: "%{attribute}は%{count}文字以上で入力してください。"
+        not_a_number: "%{attribute}は数値で入力してください。"
+        not_an_integer: "%{attribute}は整数で入力してください。"
+        greater_than: "%{attribute}は%{count}より大きい値を入力してください。"
+        greater_than_or_equal_to: "%{attribute}は%{count}以上で入力してください。"
+        less_than: "%{attribute}は%{count}より小さい値を入力してください。"
+        less_than_or_equal_to: "%{attribute}は%{count}以下で入力してください。"
+        invalid: "%{attribute}は不正な値です。"
+    attributes:
+      company:
+        name: 企業名
+      store:
+        password: パスワード
+        name: 店舗名

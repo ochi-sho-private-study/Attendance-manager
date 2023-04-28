@@ -1,0 +1,23 @@
+require:
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rake
+  - rubocop-rspec
+  - rubocop-thread_safety
+
+AllCops:
+  Exclude:
+    - bin/*
+    - db/*schema.rb
+    - vendor/**/*
+    - tmp/**/*
+  NewCops: disable
+  SuggestExtensions: false
+
+# さすがに10行だと足らないので15行にする
+Metrics/MethodLength:
+  Max: 15
+
+# BKKのコードでは採用していないので、やめる。
+Style/HashSyntax:
+  Enabled: false

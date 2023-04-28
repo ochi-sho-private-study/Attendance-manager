@@ -1,0 +1,42 @@
+name: backend
+
+on:
+  pull_request:
+    branches:
+      - main
+
+env:
+  DOCKERIZE_VERSION: v0.6.1
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Prepare dockerize for build
+        run: |
+          wget https://github.com/jwilder/dockerize/releases/download/${{ env.DOCKERIZE_VERSION }}/dockerize-linux-amd64-${{ env.DOCKERIZE_VERSION }}.tar.gz
+          sudo tar -C /usr/local/bin -xzvf dockerize-linux-amd64-${{ env.DOCKERIZE_VERSION }}.tar.gz
+          rm dockerize-linux-amd64-${{ env.DOCKERIZE_VERSION }}.tar.gz
+
+      - name: docker-compose build
+        run: |
+          docker network inspect attendance-network >/dev/null 2>&1 || docker network create attendance-network
+          docker-compose up -d backend
+          dockerize -wait tcp://127.0.0.1:3101 -timeout 60s
+          dockerize -wait tcp://127.0.0.1:3102 -timeout 60s
+          sleep 10
+
+      - name: Run Rubocop
+        run: docker-compose exec -T backend bundle ex rubocop
+
+      - name: Setup Database
+        run: |
+          docker-compose exec -T backend bundle ex rails db:create RAILS_ENV=test
+          docker-compose exec -T backend bundle ex rails ridgepole:apply RAILS_ENV=test
+
+      - name: Run RSpec
+        run: docker-compose exec -T backend bundle ex rspec

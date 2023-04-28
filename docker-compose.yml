@@ -1,0 +1,65 @@
+version: "3"
+
+services:
+  frontend:
+    container_name: att_frontend
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    volumes:
+      - ./frontend:/usr/src/app
+    command: sh -c "cd /usr/src/app && yarn run dev"
+    ports:
+      - "3100:3000"
+    depends_on:
+      - backend
+    networks:
+      - attendance-network
+
+  backend:
+    container_name: att_backend
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    volumes:
+      - ./backend:/usr/src/app
+    stdin_open: true
+    tty: true
+    env_file:
+      - env/backend.env
+    command: sh -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    ports:
+      - 3101:3000
+    depends_on:
+      - db
+      - redis
+    networks:
+      - attendance-network
+
+  db:
+    image: mysql:5.7
+    volumes:
+      - db-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - 3102:3306
+    networks:
+      - attendance-network
+
+  redis:
+    image: redis:7.0
+    volumes:
+      - redis-data:/data
+    networks:
+      - attendance-network
+
+volumes:
+  db-data:
+    driver: local
+  redis-data:
+    driver: local
+
+networks:
+  attendance-network:
+    driver: bridge
