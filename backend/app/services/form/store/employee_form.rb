@@ -16,22 +16,15 @@ module Form
         super(attributes)
       end
 
-      def create!(store) # rubocop:disable Metrics/AbcSize
+      def create!(store)
         ActiveRecord::Base.transaction do
-          employee = Employee.create!(
-            last_name: last_name,
-            first_name: first_name,
-            email: email,
-            password: password,
-            birthday: birthday,
-            company_id: store.company.id
-          )
+          employee = Employee.create!(common_employee_attributes(store))
           PositionAssignmentCollection.new(position_ids, employee.id).create!
           WorkShiftCollection.new(work_shifts, store.id, employee.id).create!
         end
       end
 
-      def update!(store) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+      def update!(store)
         ActiveRecord::Base.transaction do
           position_collection = PositionAssignmentCollection.new(position_ids, current_employee.id)
                                                             .find_or_create_by!
@@ -39,28 +32,35 @@ module Form
             work_shifts, store.id, current_employee.id
           ).find_or_create_by!
 
-          current_employee.update!(
-            last_name: last_name,
-            first_name: first_name,
-            email: email,
-            password: password,
-            birthday: birthday,
-            company_id: store.company_id,
-            position_assignments: position_collection,
-            work_shifts: work_shift_collection
+          update_params = common_employee_attributes(store).merge(
+            {
+              position_assignments: position_collection,
+              work_shifts: work_shift_collection
+            }
           )
+
+          current_employee.update!(update_params)
         end
       end
 
       # NOTE: default_attributesには、position_idsとwork_shiftsは不要。
       #       update時のリクエストボディには、current_employeeのposition_idsとwork_shiftsが含まれる。
       def default_attributes
-        {
-          last_name: current_employee.last_name,
+        { last_name: current_employee.last_name,
           first_name: current_employee.first_name,
           email: current_employee.email,
-          birthday: current_employee.birthday
-        }
+          birthday: current_employee.birthday }
+      end
+
+      private
+
+      def common_employee_attributes(store)
+        { last_name: last_name,
+          first_name: first_name,
+          email: email,
+          password: password,
+          birthday: birthday,
+          company_id: store.company.id }
       end
     end
   end
