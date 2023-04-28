@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# TODO: 店舗ログイン単位での機能がある程度完成したら、テスト対象にする。
+# :nocov:
 module Api
   module ConvenienceStore
     # 従業員のAPI
@@ -23,3 +25,4 @@ module Api
     end
   end
 end
+# :nocov:
