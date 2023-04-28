@@ -3,7 +3,7 @@ name: backend
 on:
   pull_request:
     branches:
-      - main
+      - master
 
 env:
   DOCKERIZE_VERSION: v0.6.1
