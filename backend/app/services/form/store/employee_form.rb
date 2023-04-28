@@ -47,6 +47,8 @@ module Form
         self
       end
 
+      private
+
       # NOTE: default_attributesには、position_idsとwork_shiftsは不要。
       #       update時のリクエストボディには、current_employeeのposition_idsとwork_shiftsが含まれる。
       def default_attributes
@@ -55,8 +57,6 @@ module Form
           email: current_employee.email,
           birthday: current_employee.birthday }
       end
-
-      private
 
       def common_employee_attributes(store)
         { last_name: last_name,
