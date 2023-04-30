@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       end
 
       resources :employees, only: %i[create index]
+      resources :positions, only: %i[index]
     end
   end
 end
