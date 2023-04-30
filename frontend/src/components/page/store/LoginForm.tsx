@@ -35,7 +35,7 @@ export const LoginForm: React.FC = () => {
     <div>
       <h1>店舗ログイン画面</h1>
       <h2>{errorMessage}</h2>
-      <form css={styles.FormEntire} onClick={() => handleSubmit(onSubmit)}>
+      <form css={styles.FormEntire} onSubmit={handleSubmit(onSubmit)}>
         <TextForm
           label="店舗ID（半角数字）"
           errors={errors.storeId}
