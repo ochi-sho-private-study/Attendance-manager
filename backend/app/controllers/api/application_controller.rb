@@ -5,6 +5,9 @@
 module Api
   # api/ 以下のコントローラーの継承元
   class ApplicationController < ActionController::API
+    rescue_from(ActiveRecord::RecordInvalid) { render_bad_request(_1.message) }
+    rescue_from(ActiveRecord::RecordNotFound, with: :render_not_found_error)
+
     private
 
     def render_success(message = 'success')

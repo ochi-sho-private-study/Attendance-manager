@@ -20,7 +20,7 @@ module Api
           *Form::Store::EmployeeForm::ATTRIBUTES,
           position_ids: [],
           work_shifts: %i[work_shift_master_id day_of_week]
-        ).to_hash.deep_symbolize_keys
+        ).to_hash.deep_symbolize_keys # TODO: ここちょっと汚いので、簡潔に書きたい。
       end
     end
   end

@@ -25,6 +25,7 @@
 class Store < ApplicationRecord
   belongs_to :company
   has_many :work_shifts, dependent: :destroy
+  has_many :positions, through: :company
 
   has_secure_password
 
