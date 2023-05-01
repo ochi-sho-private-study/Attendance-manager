@@ -6,8 +6,8 @@ import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { storeSessionCreateApi } from "../../../libs/storeSessionApi";
 import { StoreLoginProps } from "../../../types/StoreLoginProps";
-import { PasswordForm } from "../../ui/Form/PasswordForm";
-import { TextForm } from "../../ui/Form/TextForm";
+import { PasswordForm } from "../../ui/Form/Login/PasswordForm";
+import { TextForm } from "../../ui/Form/Login/TextForm";
 
 export const LoginForm: React.FC = () => {
   const {

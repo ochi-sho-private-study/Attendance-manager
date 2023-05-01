@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { useCurrentDatetime } from "../../../features/hooks/useCurrentDatetime";
+import { useCurrentDatetime } from "../../features/hooks/useCurrentDatetime";
 
 export const DigitalClock = () => {
   const { date, time } = useCurrentDatetime();

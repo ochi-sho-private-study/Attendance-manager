@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import Head from "next/head";
 import Image from "next/image";
-import { DigitalClock } from "../ui/Form/DigitalClock";
+import { DigitalClock } from "../ui/DigitalClock";
 
 type Props = {
   name: string;
