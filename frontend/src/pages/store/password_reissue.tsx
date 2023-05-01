@@ -2,7 +2,7 @@ import { css } from "@emotion/react";
 import { Button } from "@mui/material";
 import { NextPage } from "next";
 import { useForm } from "react-hook-form";
-import { PasswordForm } from "../../components/ui/Form/PasswordForm";
+import { PasswordForm } from "../../components/ui/Form/Login/PasswordForm";
 
 const PasswordReissue: NextPage = () => {
   const {
