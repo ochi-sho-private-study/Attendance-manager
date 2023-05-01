@@ -8,6 +8,9 @@ abort('The Rails environment is running in production mode!') if Rails.env.produ
 
 require 'rspec/rails'
 require 'factory_bot_rails'
+Dir[Rails.root.join('spec/mocks/**/*.rb')].each { require _1 }
+Dir[Rails.root.join('spec/shared_contexts/**/*.rb')].each { require _1 }
+Dir[Rails.root.join('spec/shared_examples/**/*.rb')].each { require _1 }
 
 begin
   ActiveRecord::Migration.maintain_test_schema!

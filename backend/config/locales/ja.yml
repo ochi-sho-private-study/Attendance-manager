@@ -1,4 +1,6 @@
 ja:
+  errors:
+    format: "%{message}"
   activerecord:
     errors:
       messages:
@@ -22,3 +24,5 @@ ja:
       store:
         password: パスワード
         name: 店舗名
+      position:
+        name: 部署名
