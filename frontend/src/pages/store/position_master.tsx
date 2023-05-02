@@ -55,13 +55,17 @@ export default PositionMaster;
 
 const styles = {
   TableEntire: css`
-    border-collapse: collapse;
+    border-collapse: separate;
+    overflow: hidden;
+    border: 1px solid #aaa;
+    border-spacing: 0;
     width: 100%;
     max-width: 800px;
     margin: 0 auto;
     background-color: #fff;
     color: #333;
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    border-radius: 10px;
   `,
   TrWrapper: css`
     text-align: left;
@@ -72,9 +76,11 @@ const styles = {
     background-color: #a9a9a9;
     font-weight: bold;
     text-transform: uppercase;
+    border-bottom: 1px solid #aaa;
   `,
   TdWrapper: css`
     padding: 0.8rem;
+    border-bottom: 1px solid #aaa;
   `,
   TbodyTrWrapper: css`
     &:hover {
