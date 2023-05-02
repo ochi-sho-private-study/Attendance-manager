@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { storeSessionFetchApi } from "../../libs/storeSessionApi";
+import { OtherHeader } from "./OtherHeader";
 import { StoreLoggedInHeader } from "./StoreLoggedInHeader";
 import { StoreLoginHeader } from "./StoreLoginHeader";
 
@@ -30,8 +31,13 @@ export const StoreHeader = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.pathname]);
 
-  if (isLoggedIn === true) {
+  if (isLoggedIn === true && router.pathname == "/store/home") {
     return <StoreLoggedInHeader name={storeName} />;
+  } else if (
+    isLoggedIn === true &&
+    router.pathname == "/store/position_master"
+  ) {
+    return <OtherHeader />;
   }
   return <StoreLoginHeader />;
 };
