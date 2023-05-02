@@ -3,7 +3,7 @@ import { NextPage } from "next";
 import { useState, useEffect } from "react";
 import { StoreHeader } from "../../components/base/StoreHeader";
 import { positionsfetchApi } from "../../libs/positionApi";
-import { PositionMasterProps } from "../../types/positionMasterProps";
+import { PositionMasterProps } from "../../types/PositionMasterProps";
 
 const PositionMaster: NextPage = () => {
   const [positionMasters, setPositionMasters] = useState([]);
@@ -13,10 +13,7 @@ const PositionMaster: NextPage = () => {
     setIsLoading(true);
     positionsfetchApi()
       .then((response) => {
-        // console.log(response.data.positions);
-        // console.log(Array.isArray(response.data.positions));
         setPositionMasters(response.data.positions);
-        console.log(response.data.positions[0]);
         setIsLoading(false);
       })
       .catch(() => {

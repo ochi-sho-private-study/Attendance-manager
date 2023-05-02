@@ -1,7 +1,7 @@
 import { ApiClient } from "./ApiClient";
 
 type ResponseProps = Readonly<{
-  positions: [];
+  data: { positions: [] };
 }>;
 
 export const positionsfetchApi = async (): Promise<ResponseProps> => {
