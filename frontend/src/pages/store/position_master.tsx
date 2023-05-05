@@ -1,4 +1,5 @@
 import { css } from "@emotion/react";
+import CancelIcon from "@mui/icons-material/Cancel";
 import { Button } from "@mui/material";
 import { NextPage } from "next";
 import { useState, useEffect } from "react";
@@ -58,27 +59,34 @@ const PositionMaster: NextPage = () => {
       return (
         <div css={styles.Overlay}>
           <div css={styles.ModalContent}>
+            <div css={styles.CloseButtonWrapper}>
+              <CancelIcon onClick={() => setShow(false)}></CancelIcon>
+            </div>
             <h3>編集モーダル</h3>
-            <form css={styles.FormEntire} onSubmit={handleSubmit(onSubmit)}>
-              <StringTextForm
-                label="部署名"
-                errors={errors.name}
-                register={register("name", { required: true })}
-                errorMessage="部署名は必須です。"
-              />
-              <Button
-                variant="contained"
-                sx={{
-                  background: "black",
-                  color: "white",
-                  ":hover": { background: "black" },
-                }}
-                type="submit"
-              >
-                保存
-              </Button>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <div css={styles.FormWrapper}>
+                <StringTextForm
+                  label="部署名"
+                  errors={errors.name}
+                  register={register("name", { required: true })}
+                  errorMessage="部署名は必須です。"
+                />
+              </div>
+              <div css={styles.SaveButtonWrapper}>
+                <Button
+                  css={styles.SaveButtonWrapper}
+                  variant="contained"
+                  sx={{
+                    background: "black",
+                    color: "white",
+                    ":hover": { background: "black" },
+                  }}
+                  type="submit"
+                >
+                  保存
+                </Button>
+              </div>
             </form>
-            <button onClick={() => setShow(false)}>×</button>
           </div>
         </div>
       );
@@ -190,16 +198,25 @@ const styles = {
   `,
   ModalContent: css`
     z-index: 2;
-    width: 50%;
-    padding: 1em;
+    height: 40%;
+    width: 35%;
+    padding: 3em;
     background: #fff;
   `,
-  FormEntire: css`
+  CloseButtonWrapper: css`
+    display: flex;
+    justify-content: right;
+  `,
+  FormWrapper: css`
     width: fit-content;
     margin: auto;
   `,
   ButtonWrapper: css`
     margin: 20px;
     text-align: center;
+  `,
+  SaveButtonWrapper: css`
+    display: flex;
+    justify-content: right;
   `,
 };
