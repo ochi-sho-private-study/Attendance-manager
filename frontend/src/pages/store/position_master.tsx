@@ -13,6 +13,8 @@ const PositionMaster: NextPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [show, setShow] = useState(false);
   const [editTargetPosition, setEditTargetPosition] = useState({});
+  const [positionMasterReloadTrigger, setPositionMasterReloadTrigger] =
+    useState<boolean>(false);
 
   const {
     register,
@@ -22,13 +24,11 @@ const PositionMaster: NextPage = () => {
   } = useForm<PositionMasterProps>({ shouldFocusError: false });
 
   const onSubmit: SubmitHandler<PositionMasterProps> = (data) => {
-    console.log(11111);
-    console.log(editTargetPosition);
     console.log(data);
     positionUpdateApi(editTargetPosition.id, data.name)
       .then((response) => {
         console.log(response);
-        window.location.reload();
+        setPositionMasterReloadTrigger(true);
       })
       .catch(() => {
         console.log("error");
@@ -47,8 +47,11 @@ const PositionMaster: NextPage = () => {
       })
       .catch(() => {
         console.log("error");
+      })
+      .finally(() => {
+        setPositionMasterReloadTrigger(false);
       });
-  }, []);
+  }, [positionMasterReloadTrigger]);
 
   function EditModal({ show, setShow }) {
     if (show) {
@@ -72,7 +75,7 @@ const PositionMaster: NextPage = () => {
                 }}
                 type="submit"
               >
-                更新
+                保存
               </Button>
             </form>
             <button onClick={() => setShow(false)}>×</button>
