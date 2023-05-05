@@ -13,7 +13,10 @@ const PositionMaster: NextPage = () => {
   const [positionMasters, setPositionMasters] = useState([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [show, setShow] = useState(false);
-  const [editTargetPosition, setEditTargetPosition] = useState({});
+  const [editTargetPosition, setEditTargetPosition] = useState<{
+    id: number;
+    name: string;
+  }>({ id: 0, name: "" });
   const [positionMasterReloadTrigger, setPositionMasterReloadTrigger] =
     useState<boolean>(false);
 
@@ -54,7 +57,10 @@ const PositionMaster: NextPage = () => {
       });
   }, [positionMasterReloadTrigger]);
 
-  function EditModal({ show, setShow }) {
+  const EditModal: React.FC<{ show: boolean; setShow: boolean }> = ({
+    show,
+    setShow,
+  }) => {
     if (show) {
       return (
         <div css={styles.Overlay}>
@@ -92,7 +98,7 @@ const PositionMaster: NextPage = () => {
       );
     } else {
     }
-  }
+  };
 
   return isLoading ? (
     <>
