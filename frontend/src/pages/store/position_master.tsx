@@ -17,6 +17,7 @@ const PositionMaster: NextPage = () => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<PositionMasterProps>({ shouldFocusError: false });
 
@@ -111,6 +112,7 @@ const PositionMaster: NextPage = () => {
                   onClick={() => {
                     setShow(true);
                     setEditTargetPosition(positionMaster);
+                    setValue("name", positionMaster.name);
                   }}
                 >
                   編集
